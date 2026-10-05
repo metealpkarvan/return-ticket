@@ -1,0 +1,17 @@
+{
+  "name": "Return Ticket",
+  "short_name": "Return Ticket",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#eef4fb",
+  "theme_color": "#1655ac",
+  "icons": [
+    {
+      "src": "assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

@@ -1,0 +1,234 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="Leave a clear checkpoint before an interruption. Return with one next step."
+    />
+    <meta name="theme-color" content="#1655ac" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data: blob:; connect-src 'self'; worker-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"
+    />
+    <title>Return Ticket — Mete Alp Karvan</title>
+    <link rel="icon" href="assets/icon.svg" type="image/svg+xml" />
+    <link rel="manifest" href="manifest.webmanifest" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body class="return">
+    <a class="skip" href="#main"
+      ><span data-tr="İçeriğe geç" data-en="Skip to content"
+        >İçeriğe geç</span
+      ></a
+    >
+    <div class="shell">
+      <header class="topbar">
+        <a class="brand" href="./"
+          ><img src="assets/icon.svg" alt="" />Return Ticket</a
+        >
+        <nav class="nav" aria-label="App">
+          <a href="https://github.com/metealpkarvan/return-ticket">GitHub ↗</a
+          ><button id="language" type="button" class="quiet">EN</button>
+        </nav>
+      </header>
+      <main id="main">
+        <section class="intro">
+          <div>
+            <div class="eyebrow">BOARDING PASS FOR YOUR ATTENTION</div>
+            <h1>Return Ticket</h1>
+            <p>
+              <span
+                data-tr="Kesilen işe tek bir sonraki adımla dönmek için dönüş biletleri."
+                data-en="Leave a clear checkpoint before an interruption. Return with one next step."
+                >Kesilen işe tek bir sonraki adımla dönmek için dönüş
+                biletleri.</span
+              >
+            </p>
+          </div>
+          <span class="pill"
+            ><span
+              data-tr="Hesapsız · cihazında çalışır"
+              data-en="No account · runs on your device"
+              >Hesapsız · cihazında çalışır</span
+            ></span
+          >
+        </section>
+        <div class="grid">
+          <section class="panel">
+            <div class="bar">
+              <h2>
+                <span
+                  data-tr="Ayrılmadan önce bilet bırak"
+                  data-en="Leave a ticket before switching"
+                  >Ayrılmadan önce bilet bırak</span
+                >
+              </h2>
+              <button id="demo" class="quiet">
+                <span data-tr="Örneği dene" data-en="Try a sample"
+                  >Örneği dene</span
+                >
+              </button>
+            </div>
+            <form id="ticket-form">
+              <div class="field">
+                <label for="title"
+                  ><span
+                    data-tr="Neye geri döneceksin?"
+                    data-en="What will you return to?"
+                    >Neye geri döneceksin?</span
+                  ></label
+                ><input id="title" required maxlength="120" />
+              </div>
+              <div class="field">
+                <label for="checkpoint"
+                  ><span
+                    data-tr="Tam olarak nerede kaldın?"
+                    data-en="Where exactly did you stop?"
+                    >Tam olarak nerede kaldın?</span
+                  ></label
+                ><textarea id="checkpoint" required maxlength="3000"></textarea>
+              </div>
+              <div class="field">
+                <label for="next"
+                  ><span
+                    data-tr="İlk küçük hareketin ne?"
+                    data-en="What is the first small action?"
+                    >İlk küçük hareketin ne?</span
+                  ></label
+                ><textarea id="next" required maxlength="1000"></textarea>
+              </div>
+              <div class="row">
+                <div class="field">
+                  <label for="url"
+                    ><span
+                      data-tr="Dosya veya sayfa bağlantısı (isteğe bağlı)"
+                      data-en="File or page URL (optional)"
+                      >Dosya veya sayfa bağlantısı (isteğe bağlı)</span
+                    ></label
+                  ><input id="url" type="url" maxlength="2000" />
+                </div>
+                <div class="field">
+                  <label for="minutes"
+                    ><span
+                      data-tr="Dönüş turu: dakika"
+                      data-en="Return session: minutes"
+                      >Dönüş turu: dakika</span
+                    ></label
+                  ><input
+                    id="minutes"
+                    type="number"
+                    min="1"
+                    max="120"
+                    value="12"
+                    required
+                  />
+                </div>
+              </div>
+              <div class="actions">
+                <button class="primary" id="add" type="submit">
+                  <span data-tr="Bileti bırak" data-en="Park ticket"
+                    >Bileti bırak</span
+                  ></button
+                ><button id="cancel-edit" type="button" hidden>
+                  <span data-tr="Düzenlemeyi bırak" data-en="Cancel edit"
+                    >Düzenlemeyi bırak</span
+                  >
+                </button>
+              </div>
+            </form>
+            <p class="hint">
+              <span
+                data-tr="Bir görev listesi doldurmak yerine, bıraktığın noktayı ve bir sonraki hareketi yaz."
+                data-en="Write the exact stopping point and next action instead of a long task list."
+                >Bir görev listesi doldurmak yerine, bıraktığın noktayı ve bir
+                sonraki hareketi yaz.</span
+              >
+            </p>
+          </section>
+          <section id="active"></section>
+        </div>
+        <section class="toolbar">
+          <h2>
+            <span data-tr="Bıraktığın işler" data-en="Parked work"
+              >Bıraktığın işler</span
+            >
+          </h2>
+          <label for="show-done" class="check"
+            ><input id="show-done" type="checkbox" /><span
+              data-tr="Tamamlananları göster"
+              data-en="Show completed"
+              >Tamamlananları göster</span
+            ></label
+          >
+        </section>
+        <section id="tickets" class="cards"></section>
+        <div class="toolbar">
+          <button id="backup">
+            <span data-tr="JSON yedek indir" data-en="Download JSON backup"
+              >JSON yedek indir</span
+            ></button
+          ><label
+            for="import"
+            class="visually-hidden"
+            data-tr="Yedek yükle"
+            data-en="Import backup"
+            >Yedek yükle</label
+          ><input
+            id="import"
+            type="file"
+            accept=".json,application/json"
+          /><button id="clear" class="quiet danger">
+            <span data-tr="Yerel veriyi sil" data-en="Clear local data"
+              >Yerel veriyi sil</span
+            >
+          </button>
+        </div>
+      </main>
+      <footer class="footer">
+        <details>
+          <summary>
+            <span
+              data-tr="Nasıl çalışır? Gizlilik ve sınırlar"
+              data-en="How it works · privacy and limits"
+              >Nasıl çalışır? Gizlilik ve sınırlar</span
+            >
+          </summary>
+          <p>
+            <span
+              data-tr="Biletler ve zamanlayıcı durumu bu tarayıcıda saklanır. Süre gerçek bitiş zamanı üzerinden hesaplanır; sayfayı yenilemek turu sıfırlamaz. Sekme kapalıyken bildirim veya ses gönderilmez. Başka bilet açınca önceki tur durur. Bu bir odaklanma tedavisi veya üretkenlik garantisi değildir."
+              data-en="Tickets and timer state stay in this browser. Remaining time is calculated from an absolute deadline; reloading does not reset it. No notifications or sounds are sent while the tab is closed. Opening another ticket pauses the previous session. This is not an attention treatment or productivity guarantee."
+              >Biletler ve zamanlayıcı durumu bu tarayıcıda saklanır. Süre
+              gerçek bitiş zamanı üzerinden hesaplanır; sayfayı yenilemek turu
+              sıfırlamaz. Sekme kapalıyken bildirim veya ses gönderilmez. Başka
+              bilet açınca önceki tur durur. Bu bir odaklanma tedavisi veya
+              üretkenlik garantisi değildir.</span
+            >
+          </p>
+          <p>
+            <span
+              data-tr="Örnek veriler kurgusaldır. Bu bir X/Twitter entegrasyonu değildir. Araştırma kaynakları, tasarım gerekçeleri ve testler GitHub deposunda açıklanır."
+              data-en="Sample data is fictional. This is not an X/Twitter integration. Research sources, design decisions and tests are documented in the repository."
+              >Örnek veriler kurgusaldır. Bu bir X/Twitter entegrasyonu
+              değildir. Araştırma kaynakları, tasarım gerekçeleri ve testler
+              GitHub deposunda açıklanır.</span
+            >
+          </p>
+          <a
+            href="https://github.com/metealpkarvan/return-ticket/blob/main/docs/RESEARCH.md"
+            ><span
+              data-tr="Araştırma notlarını oku"
+              data-en="Read the research notes"
+              >Araştırma notlarını oku</span
+            >
+            ↗</a
+          >
+        </details>
+        <div>© 2026 Mete Alp Karvan · MIT · v1.0.0</div>
+      </footer>
+    </div>
+    <div id="toast" class="toast" role="status" aria-live="polite"></div>
+    <script type="module" src="src/app.js"></script>
+  </body>
+</html>
